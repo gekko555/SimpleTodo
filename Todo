@@ -1,0 +1,48 @@
+// ToDoList.java
+package TodoApp;
+
+	// ToDoListApp.java
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+	public class TodoList {
+	    public static void main(String[] args) {
+	        SwingUtilities.invokeLater(() -> {
+	            createAndShowGUI();
+	        });
+	    }
+
+	    private static void createAndShowGUI() {
+	        JFrame frame = new JFrame("ToDo List App");
+	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        frame.setSize(400, 300);
+
+	        // ToDoリストの表示領域
+	        JTextArea textArea = new JTextArea();
+	        textArea.setEditable(false);
+
+	        // テキストフィールドとボタン
+	        JTextField inputField = new JTextField(20);
+	        JButton addButton = new JButton("Add");
+	        addButton.addActionListener(new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                String task = inputField.getText();
+	                textArea.append(task + "\n");
+	                inputField.setText("");
+	            }
+	        });
+
+	        // レイアウトの設定
+	        frame.setLayout(new BorderLayout());
+	        frame.add(new JScrollPane(textArea), BorderLayout.CENTER);
+	        JPanel inputPanel = new JPanel();
+	        inputPanel.add(inputField);
+	        inputPanel.add(addButton);
+	        frame.add(inputPanel, BorderLayout.SOUTH);
+
+	        frame.setVisible(true);
+	    }
+	}
